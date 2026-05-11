@@ -77,7 +77,6 @@ Open `index.html` in any text editor (Notepad, VS Code, etc.) and search for the
 
 Once live, add the URL to:
 - Your CV (next to LinkedIn)
-- Your Tesla application profile
 - Your LinkedIn "Website" field
 
 ---
