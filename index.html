@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carlos Maldonado — Engineering Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #FFFFFF;
+      --off-white: #F7F6F3;
+      --light-gray: #EBEBEB;
+      --mid-gray: #999;
+      --dark: #111111;
+      --accent: #1A1A1A;
+      --line: #E0E0E0;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--dark);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      letter-spacing: 0.01em;
+      color: var(--dark);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--dark); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 72px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem 5rem 3rem;
+      border-right: 1px solid var(--line);
+    }
+
+    .hero-tag {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.1;
+      margin-bottom: 1.8rem;
+      color: var(--dark);
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: #555;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: #444;
+      max-width: 420px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-contacts a {
+      font-size: 0.85rem;
+      color: var(--mid-gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .hero-contacts a:hover { color: var(--dark); }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      background: var(--dark);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--dark);
+      transition: background 0.2s, color 0.2s;
+      width: fit-content;
+    }
+    .btn-primary:hover { background: var(--white); color: var(--dark); }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 3rem 5rem 4rem;
+      background: var(--off-white);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-item {}
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 2.6rem;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+    }
+
+    .skills-section {}
+    .skills-title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .skills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-tag {
+      font-size: 0.78rem;
+      font-weight: 400;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: #444;
+      border-radius: 2px;
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 6rem 3rem; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      white-space: nowrap;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.15;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--white); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--line);
+    }
+
+    .project-card {
+      padding: 2.5rem;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      transition: background 0.25s;
+      cursor: default;
+    }
+    .project-card:hover { background: var(--off-white); }
+    .project-card:nth-child(even) { border-right: none; }
+    .project-card:nth-last-child(-n+2) { border-bottom: none; }
+
+    .project-number {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--mid-gray);
+      margin-bottom: 1rem;
+    }
+
+    .project-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      background: var(--light-gray);
+      display: block;
+    }
+
+    .project-img-placeholder {
+      width: 100%;
+      height: 180px;
+      background: var(--light-gray);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--mid-gray);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .project-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      background: var(--dark);
+      color: var(--white);
+      border-radius: 2px;
+    }
+    .project-tag.outline {
+      background: transparent;
+      color: var(--mid-gray);
+      border: 1px solid var(--line);
+    }
+
+    .project-title {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-highlights {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .project-highlights li {
+      font-size: 0.82rem;
+      color: #444;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .project-highlights li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--mid-gray);
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--off-white); }
+
+    .experience-list { display: flex; flex-direction: column; gap: 0; }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .exp-item:first-child { border-top: 1px solid var(--line); }
+
+    .exp-meta {}
+    .exp-period {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--mid-gray);
+      margin-bottom: 0.3rem;
+    }
+    .exp-company {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      margin-bottom: 0.2rem;
+    }
+    .exp-location {
+      font-size: 0.78rem;
+      color: var(--mid-gray);
+    }
+
+    .exp-content {}
+    .exp-role {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 0.6rem;
+    }
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .exp-bullets li {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: #444;
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.6;
+    }
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--mid-gray);
+    }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--white); }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--line);
+    }
+
+    .edu-card {
+      padding: 2.5rem;
+      border-right: 1px solid var(--line);
+    }
+    .edu-card:last-child { border-right: none; }
+
+    .edu-period {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 0.8rem;
+    }
+    .edu-degree {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .edu-school {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 0.3rem;
+    }
+    .edu-detail {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--mid-gray);
+      line-height: 1.6;
+    }
+    .edu-badge {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--dark);
+      color: var(--dark);
+    }
+
+    /* ── AWARDS ── */
+    #awards { background: var(--off-white); }
+
+    .awards-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    .award-item {
+      padding: 2rem;
+      background: var(--white);
+      border: 1px solid var(--line);
+    }
+    .award-year {
+      font-family: var(--serif);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #ccc;
+    }
+    .award-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+    .award-body {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--mid-gray);
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+    }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--mid-gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--dark); }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { border-right: none; border-bottom: 1px solid var(--line); padding: 4rem 1.5rem 3rem; }
+      .hero-right { padding: 3rem 1.5rem; }
+      section { padding: 4rem 1.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card:nth-child(even) { border-right: 1px solid var(--line); }
+      .project-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .project-card:last-child { border-bottom: none; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .edu-card { border-right: none; border-bottom: 1px solid var(--line); }
+      .edu-card:last-child { border-bottom: none; }
+      .awards-list { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-name">Carlos Maldonado</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#awards">Awards</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" style="padding:0;">
+    <div class="hero-left">
+      <p class="hero-tag">Mechanical Engineer · Manufacturing 4.0</p>
+      <h1 class="hero-name">Carlos Arturo<br><em>Maldonado Peñate</em></h1>
+      <p class="hero-desc">
+        Mechanical engineer with international experience across Colombia, Germany, Italy, and France. Currently pursuing a joint M.Sc. in Manufacturing 4.0 with a focus on advanced manufacturing, materials science, and simulation.
+      </p>
+      <div class="hero-contacts">
+        <a href="mailto:camaldonado224@gmail.com">camaldonado224@gmail.com</a>
+        <a href="tel:+4917750302030">+49 177 5030203</a>
+        <a href="https://linkedin.com/in/carlosmaldonado224" target="_blank">linkedin.com/in/carlosmaldonado224</a>
+        <span style="font-size:0.85rem; color:#999;">Chemnitz, Germany</span>
+      </div>
+      <a href="#projects" class="btn-primary">View Projects</a>
+    </div>
+
+    <div class="hero-right">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Countries studied in</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Years of experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1.8</div>
+          <div class="stat-label">B.Sc. Final grade (DE scale)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Languages (C1+)</div>
+        </div>
+      </div>
+
+      <div class="skills-section">
+        <p class="skills-title">Technical Skills</p>
+        <div class="skills-row">
+          <span class="skill-tag">CATIA V5</span>
+          <span class="skill-tag">SolidWorks</span>
+          <span class="skill-tag">AutoCAD</span>
+          <span class="skill-tag">GD&T</span>
+        </div>
+        <div class="skills-row">
+          <span class="skill-tag">ANSYS Mechanical</span>
+          <span class="skill-tag">ANSYS Fluent</span>
+          <span class="skill-tag">ANSYS Granta</span>
+          <span class="skill-tag">Thermocalc</span>
+          <span class="skill-tag">SIMULINK</span>
+        </div>
+        <div class="skills-row">
+          <span class="skill-tag">MATLAB</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SAP</span>
+          <span class="skill-tag">MS Excel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-label">01</span>
+      <h2 class="section-title">Selected Projects</h2>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- P1: Masterarbeit -->
+      <div class="project-card fade-in">
+        <p class="project-number">01 / 04</p>
+        <div class="project-img-placeholder">Image coming soon</div>
+        <div class="project-tags">
+          <span class="project-tag">Master's Thesis</span>
+          <span class="project-tag outline">TU Chemnitz · 2025–2026</span>
+        </div>
+        <h3 class="project-title">Cryogenic Cooling System for Turning Processes</h3>
+        <p class="project-desc">
+          Development and analysis of a cryogenic cooling system applied to turning operations. The project investigates thermal management strategies to improve tool life and surface quality in precision machining.
+        </p>
+        <ul class="project-highlights">
+          <li>Thermodynamic modeling and system design of cryogenic cooling circuit</li>
+          <li>ANSYS Fluent simulation for heat transfer and fluid flow analysis</li>
+          <li>Experimental validation on turning test rig at TU Chemnitz</li>
+          <li>Relevant to Tesla Powertrain and Testing & Homologation Engineering</li>
+        </ul>
+      </div>
+
+      <!-- P2: ATV Electric -->
+      <div class="project-card fade-in">
+        <p class="project-number">02 / 04</p>
+        <div class="project-img-placeholder">Image coming soon</div>
+        <div class="project-tags">
+          <span class="project-tag">Mechanical Design</span>
+          <span class="project-tag outline">Universidad del Norte</span>
+        </div>
+        <h3 class="project-title">Electric ATV Steering System for Ecotourism</h3>
+        <p class="project-desc">
+          Design of the steering system for an all-terrain electric vehicle intended for ecotourism applications. The project covered full mechanical design of the steering geometry, component sizing, and technical documentation.
+        </p>
+        <ul class="project-highlights">
+          <li>Ackermann steering geometry design and kinematic analysis</li>
+          <li>Mechanical component sizing: loads, safety factors, turning radius</li>
+          <li>3D CAD modeling and technical drawings in SolidWorks</li>
+          <li>Directly relevant to Tesla Vehicle Engineering / Chassis team</li>
+        </ul>
+      </div>
+
+      <!-- P3: Motorcycle Front Fork -->
+      <div class="project-card fade-in">
+        <p class="project-number">03 / 04</p>
+        <div class="project-img-placeholder">Image coming soon</div>
+        <div class="project-tags">
+          <span class="project-tag">Materials & Design</span>
+          <span class="project-tag outline">Politecnico di Torino · 2025</span>
+        </div>
+        <h3 class="project-title">Material Selection: Motorcycle Front Fork Assembly</h3>
+        <p class="project-desc">
+          Systematic material selection for a motorcycle front fork inner tube using ANSYS Granta EduPack. The study combined performance index optimization with lifecycle sustainability analysis.
+        </p>
+        <ul class="project-highlights">
+          <li>4 performance indexes derived from first principles (stiffness, fracture toughness, fatigue life, weight)</li>
+          <li>Ashby diagram analysis filtering 4181 materials down to AISI 1095 carbon steel</li>
+          <li>Multi-criteria decision matrix: supply chain, manufacturability, recyclability</li>
+          <li>Eco-Audit LCA: CO₂ footprint comparison across transport scenarios (truck vs rail vs air)</li>
+        </ul>
+      </div>
+
+      <!-- P4: Sempertex -->
+      <div class="project-card fade-in">
+        <p class="project-number">04 / 04</p>
+        <div class="project-img-placeholder">Image coming soon</div>
+        <div class="project-tags">
+          <span class="project-tag">Bachelor's Thesis</span>
+          <span class="project-tag outline">Universidad del Norte · 2023</span>
+        </div>
+        <h3 class="project-title">Automated Balloon Filling Machine with Visual Inspection</h3>
+        <p class="project-desc">
+          Design and conceptualization of an automated machine for balloon filling and real-time visual defect detection for Sempertex, a leading balloon manufacturer. Graded 1.7 (DE scale).
+        </p>
+        <ul class="project-highlights">
+          <li>Full mechanical system design: actuation, filling mechanism, and conveyor integration</li>
+          <li>Computer vision pipeline for automated defect detection</li>
+          <li>Process automation logic and control system concept</li>
+          <li>Delivered as industry project for Sempertex S.A.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header">
+      <span class="section-label">02</span>
+      <h2 class="section-title">Work Experience</h2>
+    </div>
+
+    <div class="experience-list">
+
+      <div class="exp-item fade-in">
+        <div class="exp-meta">
+          <p class="exp-period">Feb 2026 — Present</p>
+          <p class="exp-company">TU Chemnitz</p>
+          <p class="exp-location">Chemnitz, Germany</p>
+        </div>
+        <div class="exp-content">
+          <p class="exp-role">Student Research Assistant — Thermal Spraying</p>
+          <ul class="exp-bullets">
+            <li>Conducting laboratory experiments in thermal spraying and surface engineering</li>
+            <li>Sample preparation and metallographic analysis of materials</li>
+            <li>Evaluation of experimental results for materials characterization</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item fade-in">
+        <div class="exp-meta">
+          <p class="exp-period">Oct 2023 — Aug 2024</p>
+          <p class="exp-company">Robert Bosch GmbH</p>
+          <p class="exp-location">Immenstadt, Germany</p>
+        </div>
+        <div class="exp-content">
+          <p class="exp-role">PreMaster — Packaging Development</p>
+          <ul class="exp-bullets">
+            <li>Created and maintained BOMs to support series production</li>
+            <li>Coordinated with international plants, customers and suppliers on packaging projects</li>
+            <li>Developed and evaluated packaging solutions in an international production environment</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item fade-in">
+        <div class="exp-meta">
+          <p class="exp-period">Mar 2023 — Aug 2023</p>
+          <p class="exp-company">BAUER Maschinen GmbH</p>
+          <p class="exp-location">Schrobenhausen, Germany</p>
+        </div>
+        <div class="exp-content">
+          <p class="exp-role">Intern — Engineering & Design</p>
+          <ul class="exp-bullets">
+            <li>Created and adapted manufacturing and assembly drawings in SolidWorks for drilling rigs</li>
+            <li>Dimensioned and adapted mechanical components within the design process</li>
+            <li>Created and maintained BOMs for production</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-header">
+      <span class="section-label">03</span>
+      <h2 class="section-title">Education</h2>
+    </div>
+
+    <div class="edu-grid">
+      <div class="edu-card fade-in">
+        <p class="edu-period">2024 — Present</p>
+        <h3 class="edu-degree">Joint M.Sc. Manufacturing 4.0</h3>
+        <p class="edu-school">École Centrale Lyon – ENISE / Politecnico di Torino / TU Chemnitz</p>
+        <p class="edu-detail">Saint-Étienne · Turin · Chemnitz<br>Focus: Manufacturing Engineering & Materials Science<br>Thesis: Cryogenic Cooling System for Turning Processes</p>
+        <span class="edu-badge">Erasmus Mundus Scholar</span>
+      </div>
+      <div class="edu-card fade-in">
+        <p class="edu-period">2022 — 2023</p>
+        <h3 class="edu-degree">Exchange Semester — Mechanical Engineering</h3>
+        <p class="edu-school">Hochschule Reutlingen TEC</p>
+        <p class="edu-detail">Reutlingen, Germany<br>DAAD KOSPIE Scholarship recipient</p>
+      </div>
+      <div class="edu-card fade-in">
+        <p class="edu-period">2018 — 2023</p>
+        <h3 class="edu-degree">B.Sc. Mechanical Engineering</h3>
+        <p class="edu-school">Universidad del Norte</p>
+        <p class="edu-detail">Barranquilla, Colombia<br>Final grade: 1.8 (DE scale)<br>Thesis grade: 1.7 — Automated balloon filling machine with visual inspection for Sempertex S.A.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards">
+    <div class="section-header">
+      <span class="section-label">04</span>
+      <h2 class="section-title">Awards & Scholarships</h2>
+    </div>
+
+    <div class="awards-list">
+      <div class="award-item fade-in">
+        <p class="award-year">2024</p>
+        <p class="award-name">Erasmus Mundus Scholarship — META 4.0</p>
+        <p class="award-body">Full scholarship for the two-year international M.Sc. program jointly offered by six European universities. Selected from over 700 applicants worldwide.</p>
+      </div>
+      <div class="award-item fade-in">
+        <p class="award-year">2022</p>
+        <p class="award-name">KOSPIE Scholarship — DAAD</p>
+        <p class="award-body">One-year scholarship for study and professional development in Germany, awarded by the German Academic Exchange Service (DAAD) to engineers from developing countries.</p>
+      </div>
+      <div class="award-item fade-in">
+        <p class="award-year">2017</p>
+        <p class="award-name">Orgullo Caribe Scholarship</p>
+        <p class="award-body">Merit scholarship for the first year of undergraduate studies at Universidad del Norte, awarded to students with outstanding results in the national ICFES examination.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-name">Carlos Arturo Maldonado Peñate</p>
+    <div class="footer-links">
+      <a href="mailto:camaldonado224@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/carlosmaldonado224" target="_blank">LinkedIn</a>
+      <a href="Carlos_Maldonado_CV.pdf" target="_blank">Download CV</a>
+    </div>
+  </footer>
+
+  <script>
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
